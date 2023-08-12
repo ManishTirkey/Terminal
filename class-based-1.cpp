@@ -37,15 +37,15 @@ public:
         {
             std::cout << e->name << "    ";
         }
-        std::cout<<std::endl;
+        std::cout << std::endl;
     }
 
     void path(Node *node)
     {
-        if(node == nullptr)
+        if (node == nullptr)
             return;
         path(node->PrevNode);
-        std::cout<<node->name << " > ";
+        std::cout << node->name << " > ";
     }
 };
 
@@ -53,73 +53,90 @@ int main()
 {
     Node file_system;
     Node *root = file_system.createNode("This Pc");
-    
+
     int ch;
     Node *current_node = root;
 
-    do{
-        std::cout<<std::endl;
-        std::cout << "1. enter"<<std::endl;
-        std::cout << "2. go back"<<std::endl;
-        std::cout << "3. create folder"<<std::endl;
-        std::cout << "4. Display"<<std::endl;
-        std::cout << "5. exit"<<std::endl;
+    do
+    {
+        std::cout << std::endl;
+        std::cout << "1. enter" << std::endl;
+        std::cout << "2. go back" << std::endl;
+        std::cout << "3. create folder" << std::endl;
+        std::cout << "4. Display" << std::endl;
+        std::cout << "5. exit" << std::endl;
+        std::cout << "6. Help" << std::endl;
         file_system.path(current_node);
-        std::cout<<" ";
+        std::cout << " ";
         std::cin >> ch;
 
         std::string folder_name;
 
-        std::cout<< "---------------OUTPUT----------------------"<<std::endl;
-        switch(ch){
-            case 1: 
-                int index;
-                std::cout<<"at which node: "; 
-                std::cin>>index;
-                try{
-                    current_node = current_node->childNodes.at(index-1);
-                }
-                catch (const std::out_of_range& e)
-                {
-                    std::cout<<"no folder at: "<<index<<std::endl;
-                }
+        std::cout << "---------------OUTPUT----------------------" << std::endl;
+        switch (ch)
+        {
+        case 1:
+            int index;
+            std::cout << "at which node: ";
+            std::cin >> index;
+            try
+            {
+                current_node = current_node->childNodes.at(index - 1);
+            }
+            catch (const std::out_of_range &e)
+            {
+                std::cout << "no folder at: " << index << std::endl;
+            }
 
-                break;
+            break;
 
-            case 2: 
-                if (current_node->PrevNode == nullptr)
-                    std::cout<<"you are in root node: "<<current_node->name<<std::endl;
-                
-                else
-                    current_node = current_node->PrevNode;
+        case 2:
+            if (current_node->PrevNode == nullptr)
+                std::cout << "you are in root node: " << current_node->name << std::endl;
 
-                break;
+            else
+                current_node = current_node->PrevNode;
 
-            case 3:
-                
-                std::cout<< "enter folder name: ";
-                std::cin>>folder_name;
-                file_system.createChildNode(current_node, folder_name);
+            break;
 
-                break;
+        case 3:
 
-            case 4:
-                file_system.display(current_node);
-                break;
+            std::cout << "enter folder name: ";
+            std::cin >> folder_name;
+            file_system.createChildNode(current_node, folder_name);
 
-            case 5:
-                std::cout<<"good bye! have a nice day"<<std::endl;
+            break;
 
-                break;
+        case 4:
+            file_system.display(current_node);
+            break;
 
-            default: std::cout<<"invalid!"<<std::endl;
+        case 5:
+            std::cout << "good bye! have a nice day" << std::endl;
+
+            break;
+
+        case 6:
+
+            std::cout << "\t\t DEMO TERMINAL " << std::endl;
+            std::cout << "\tCOPYRIGHT BY MANISH TIRKEY" << std::endl;
+            std::cout << "\nMenu based demo terminal." << std::endl;
+            std::cout << "input via menu numbers." << std::endl;
+            std::cout << "\nNote: at menu 1 (enter) , input the index of folder name not folder name" << std::endl;
+            std::cout << "to see the all folders name in current directory choose 4 menu (Display)" << std::endl;
+            std::cout << "after looking all folders input index of folder starting with 1 index to 'N'." << std::endl;
+
+            break;
+
+        default:
+            std::cout
+                << "invalid!"
+                << std::endl;
         }
 
-        
-        std::cout<< "---------------OUTPUT--END--------------------"<<std::endl;
+        std::cout << "---------------OUTPUT--END--------------------" << std::endl;
 
-    }while (ch != 5);
-
+    } while (ch != 5);
 
     delete current_node;
     delete root;
